@@ -21,7 +21,7 @@ module Tegawa
       # handle incoming mail, just show the message source
       @logger.info "You've got mail! From: #{@mail.from}"
 
-      message = "**Mail-From:** #{@mail.from}\r\n**Subject:** #{@mail.subject}\r\n\r\n#{@mail.body}"
+      message = "Mail-From: #{@mail.from}\r\nSubject: #{@mail.subject}\r\n\r\n#{@mail.body}"
       @queue << message
     end
   end

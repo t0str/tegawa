@@ -22,4 +22,3 @@ module Tegawa
     @mail_server = mail_server
   end
 end
-

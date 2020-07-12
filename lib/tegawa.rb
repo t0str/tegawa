@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 require "logger"
-require "byebug"
 
 require "tegawa/version"
 require "tegawa/core"
 require "tegawa/mail_server"
+require "tegawa/watcher"
 require "tegawa/bot"
 
 module Tegawa
   class Error < StandardError; end
   # Your code goes here...
   # try to gracefully shutdown on Ctrl-C
-  trap('INT') do
+  trap("INT") do
     puts "#{Time.now}: Interrupted, exit now..."
     exit 0
   end

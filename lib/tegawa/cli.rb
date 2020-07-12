@@ -5,6 +5,7 @@ require "optparse"
 require "tegawa"
 require "tegawa/bot"
 require "tegawa/mail_server"
+require "tegawa/watcher"
 
 module Tegawa
   module Cli
@@ -24,7 +25,20 @@ module Tegawa
 
           # opt_parser = OptionParser.new do |opts|
           opt_parser = OptionParser.new { |opts|
-            opts.banner = "Usage: tegawa [options]"
+            opts.banner = <<~EOF
+              Usage: tegawa [options]
+
+              TeGaWa stands for Telegram GateWay. This tool is supposed to be run
+              as a daemon and accept local mail as well as watch a directory for
+              text files. It then forwards these mails and files to a Telegram
+              channel so you can easily stay informed about what is happening on
+              your systems.
+
+              It expects $TEGAWA_TOKEN to contain your telegram bot token and it
+              needs the channel_id to which it forwards the information.
+
+            EOF
+
             opts.on("-cCHANNEL", "--channel=CHANNEL", "The id of the telegram channel that should get the forwarded messages. Make sure your bot is a member first.") do |v|
               args[:channel] = v
             end
@@ -37,18 +51,18 @@ module Tegawa
             opts.on("-lLOG", "--logfile=LOG", "Where to write logging output. Default is STDOUT.") do |v|
               args[:log_file] = make_log_file(v)
             end
-            # opts.on("-wWATCH", "--watch=WATCH", "Which directory to watch for files to forward") do |v|
-            #   unless File.directory?(v)
-            #     puts "Watch dir not a directory."
-            #     exit
-            #   end
-            #   args[:watch_dir] = v
-            # end
+            opts.on("-wWATCH", "--watch=WATCH", "Which directory to watch for files to forward") do |v|
+              unless File.directory?(v)
+                puts "Watch dir not a directory."
+                exit
+              end
+              args[:watch_dir] = v
+            end
             opts.on("-h", "--help", "Prints this help") do
               puts opts
               exit
             end
-            opts.on("", "--version", "Show version") do
+            opts.on("--version", "Show version") do
               puts "Telegram GateWay Version #{Tegawa::VERSION}"
               exit
             end
@@ -64,7 +78,6 @@ module Tegawa
 
           setup(args)
         end
-
 
         private
 
@@ -87,9 +100,9 @@ module Tegawa
           Tegawa.mail_server = @mail_server
           @mail_server.start
 
-          # unless args[:watch_dir].nil?
-          #   @watcher = Tegawa::Watcher.new(watch_dir)
-          # end
+          unless args[:watch_dir].nil?
+            @watcher = Tegawa::Watcher.new(args[:watch_dir])
+          end
 
           # the bot contains the main loop
           @bot = Tegawa::Bot.new(args[:token], args[:channel])
