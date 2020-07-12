@@ -9,8 +9,6 @@ module Tegawa
       super(port, addr)
       @queue = Tegawa.queue
       @logger = Tegawa.logger
-
-      @logger.info "Mailserver running on #{addr}:#{port}"
     end
 
     def on_message_data_event(ctx)
