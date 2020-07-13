@@ -11,6 +11,10 @@ module Tegawa
       @logger = Tegawa.logger
     end
 
+    def start
+      super
+    end
+
     def on_message_data_event(ctx)
       # Output for debug
       @logger.debug("mail reveived at: [#{ctx[:server][:local_ip]}:#{ctx[:server][:local_port]}] from: [#{ctx[:envelope][:from]}] for recipient(s): [#{ctx[:envelope][:to]}]...")

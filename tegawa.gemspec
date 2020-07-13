@@ -20,9 +20,12 @@ Gem::Specification.new do |spec|
   spec.metadata["changelog_uri"] = "https://github.com/to-str/tegawa"
 
   spec.add_runtime_dependency "telegram-bot-ruby", ["~> 0.12.0"]
-  spec.add_runtime_dependency "midi-smtp-server", ["~> 2.3"]
+  spec.add_runtime_dependency "midi-smtp-server", ["~> 2.1.0"]
   spec.add_runtime_dependency "mail", ["~> 2.7"]
-  spec.add_runtime_dependency "listen", ["~> 3.0"]
+  spec.add_runtime_dependency "faraday", ["~> 0.17.3"]
+  spec.add_runtime_dependency "ffi", ["~> 1.10.0"]
+  spec.add_runtime_dependency "listen", ["~> 3.0.0"]
+  spec.add_runtime_dependency "rb-inotify", ["~> 0.9.0"]
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
