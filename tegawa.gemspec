@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage = "https://github.com/to-str/tegawa"
   spec.license = "MIT"
+  # minimum version required by 'listen' gem
   spec.required_ruby_version = Gem::Requirement.new(">= 1.9.3")
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
@@ -17,6 +18,11 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/to-str/tegawa"
   spec.metadata["changelog_uri"] = "https://github.com/to-str/tegawa"
+
+  spec.add_runtime_dependency "telegram-bot-ruby", ["~> 0.12.0"]
+  spec.add_runtime_dependency "midi-smtp-server", ["~> 2.3"]
+  spec.add_runtime_dependency "mail", ["~> 2.7"]
+  spec.add_runtime_dependency "listen", ["~> 3.0"]
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

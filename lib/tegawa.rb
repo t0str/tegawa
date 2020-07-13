@@ -19,7 +19,7 @@ module Tegawa
 
   # setup exit code
   at_exit do
-    Tegawa.mail_server&.stop
+    Tegawa.mail_server.stop if Tegawa.mail_server
     # puts "#{Time.now}: TeGaWa down!\n"
   end
 end

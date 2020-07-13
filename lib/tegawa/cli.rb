@@ -25,17 +25,17 @@ module Tegawa
 
           # opt_parser = OptionParser.new do |opts|
           opt_parser = OptionParser.new { |opts|
-            opts.banner = <<~EOF
-              Usage: tegawa [options]
+            opts.banner = <<-EOF
+Usage: tegawa [options]
 
-              TeGaWa stands for Telegram GateWay. This tool is supposed to be run
-              as a daemon and accept local mail as well as watch a directory for
-              text files. It then forwards these mails and files to a Telegram
-              channel so you can easily stay informed about what is happening on
-              your systems.
+TeGaWa stands for Telegram GateWay. This tool is supposed to be run
+as a daemon and accept local mail as well as watch a directory for
+text files. It then forwards these mails and files to a Telegram
+channel so you can easily stay informed about what is happening on
+your systems.
 
-              It expects $TEGAWA_TOKEN to contain your telegram bot token and it
-              needs the channel_id to which it forwards the information.
+It expects $TEGAWA_TOKEN to contain your telegram bot token and it
+needs the channel_id to which it forwards the information.
 
             EOF
 
